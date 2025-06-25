@@ -1,6 +1,7 @@
 import { IsNotEmpty } from "class-validator";
-import { Column, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity({name: "tb_tema"})
 export class Tema {
     @PrimaryGeneratedColumn()
     id: number;
