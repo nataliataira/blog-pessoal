@@ -6,6 +6,6 @@ export class Tema {
     id: number;
 
     @IsNotEmpty()
-    @Column({length: 100, nullable: false})
+    @Column({length: 255, nullable: false})
     descricao: string;
 }
