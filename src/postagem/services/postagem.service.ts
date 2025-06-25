@@ -11,14 +11,21 @@ export class PostagemService {
         private PostagemRepository: Repository<Postagem>
     ) { }
 
-    async create(postagem: Postagem): Promise<Postagem> {
-        return await this.PostagemRepository.save(postagem);
+    async findAll(): Promise<Postagem[]> {
+        return await this.PostagemRepository.find({
+            relations: {
+                tema: true
+            }
+        });
     }
 
     async findByID(id: number): Promise<Postagem> {
         const postagem = await this.PostagemRepository.findOne({
             where: {
                 id
+            },
+            relations: {
+                tema: true
             }
         });
 
@@ -33,6 +40,9 @@ export class PostagemService {
         const postagem = await this.PostagemRepository.find({
             where: {
                 titulo: ILike(`%${titulo}%`)
+            },
+            relations: {
+                tema: true
             }
         });
 
@@ -51,6 +61,9 @@ export class PostagemService {
         const postagem = await this.PostagemRepository.find({
             where: {
                 data: Between(dataInicial, dataFinal)
+            },
+            relations: {
+                tema: true
             }
         });
 
@@ -61,8 +74,8 @@ export class PostagemService {
         return postagem;
     }
 
-    async findAll(): Promise<Postagem[]> {
-        return await this.PostagemRepository.find();
+    async create(postagem: Postagem): Promise<Postagem> {
+        return await this.PostagemRepository.save(postagem);
     }
 
     async update(postagem: Postagem):Promise<Postagem> {
