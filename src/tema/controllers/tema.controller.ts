@@ -43,5 +43,4 @@ export class TemaController {
   delete(@Param('id', ParseIntPipe) id: number){
     return this.temaService.delete(id);
   }
-
 }
