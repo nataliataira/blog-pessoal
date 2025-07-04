@@ -37,10 +37,6 @@ export class UsuarioService {
             }
         });
 
-        if (!buscaUser) {
-            throw new HttpException("Usuario não encontrado!", HttpStatus.NOT_FOUND);
-        }
-
         return buscaUser;
     }
 
