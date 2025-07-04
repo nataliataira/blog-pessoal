@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
-import { App } from 'supertest/types';
 import { AppModule } from './../src/app.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -17,7 +16,7 @@ describe('Testes dos Módulos Usuario e Auth (e2e)', () => {
         TypeOrmModule.forRoot({
           type: 'sqlite',
           database: ':memory:',
-          entities: [__dirname + "./../src/**/entities/*.entity.ts"],
+          entities: [__dirname + "../src/**/entities/*.entity.ts"],
           synchronize: true,
           dropSchema: true,
         }),
