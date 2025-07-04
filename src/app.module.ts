@@ -4,6 +4,9 @@ import { Postagem } from './postagem/entities/postagem.entity';
 import { PostagemModule } from './postagem/postagem.module';
 import { Tema } from './tema/entities/tema.entity';
 import { TemaModule } from './tema/tema.module';
+import { AuthModule } from './auth/auth.module';
+import { Usuario } from './usuario/entities/usuario.entity';
+import { UsuarioModule } from './usuario/UsuarioModule';
 
 @Module({
   imports: [
@@ -12,13 +15,15 @@ import { TemaModule } from './tema/tema.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: '',
+      password: 'westwing',
       database: 'db_blog_pessoal',
-      entities: [Postagem, Tema],
+      entities: [Postagem, Tema, Usuario],
       synchronize: true,
     }),
     PostagemModule,
-    TemaModule
+    TemaModule,
+    AuthModule,
+    UsuarioModule
   ]
 })
 export class AppModule {}
