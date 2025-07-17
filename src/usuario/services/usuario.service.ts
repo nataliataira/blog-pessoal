@@ -1,19 +1,24 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Usuario } from '../entities/usuario.entity';
-import { Bcrypt } from '../../auth/bcrypt/bcrypt';
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Usuario } from "../entities/usuario.entity";
+import { Repository } from "typeorm";
+import { Bcrypt } from "src/auth/bcrypt/bcrypt";
 
 @Injectable()
 export class UsuarioService {
+
     constructor(
         @InjectRepository(Usuario)
         private usuarioRepository: Repository<Usuario>,
         private bcrypt: Bcrypt
-    ) { }
+    ) {}
 
     async findAll(): Promise<Usuario[]> {
-        return await this.usuarioRepository.find();
+        return await this.usuarioRepository.find({
+            relations: {
+                postagem: true
+            }
+        });
 
     }
 
@@ -21,6 +26,9 @@ export class UsuarioService {
         const usuario = await this.usuarioRepository.findOne({
             where: {
                 id
+            },
+            relations: {
+                postagem: true
             }
         });
 
@@ -31,13 +39,14 @@ export class UsuarioService {
     }
 
     async findByUsuario(usuario: string): Promise<Usuario | null> {
-        const buscaUser =  await this.usuarioRepository.findOne({
+        return await this.usuarioRepository.findOne({
             where: {
                 usuario: usuario
+            },
+            relations: {
+                postagem: true
             }
-        });
-
-        return buscaUser;
+        })
     }
 
     async create(usuario: Usuario): Promise<Usuario> {

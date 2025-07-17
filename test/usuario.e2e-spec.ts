@@ -16,7 +16,7 @@ describe('Testes dos Módulos Usuario e Auth (e2e)', () => {
         TypeOrmModule.forRoot({
           type: 'sqlite',
           database: ':memory:',
-          entities: [__dirname + "../src/**/entities/*.entity.ts"],
+          entities: [__dirname + "./../src/**/entities/*.entity.ts"],
           synchronize: true,
           dropSchema: true,
         }),

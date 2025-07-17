@@ -28,5 +28,5 @@ export class Postagem {
     @ManyToOne(() => Usuario, (usuario) => usuario.postagem, {
         onDelete: "CASCADE"
     })
-    usuario: Usuario
+    usuario: Usuario;
 }

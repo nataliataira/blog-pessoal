@@ -8,6 +8,12 @@ import { JwtAuthGuard } from "src/auth/guard/jwt-auth.guard";
 export class TemaController {
   constructor(private readonly temaService: TemaService) { }
 
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  create(@Body() tema: Tema): Promise<Tema> {
+    return this.temaService.create(tema);
+  }
+
   @Get()
   @HttpCode(HttpStatus.OK)
   findAll(): Promise<Tema[]> {
@@ -16,20 +22,14 @@ export class TemaController {
 
   @Get('/:id')
   @HttpCode(HttpStatus.OK)
-  findById(@Param('id', ParseIntPipe) id: number): Promise<Tema> {
+  findById(@Param('id', ParseIntPipe)id: number): Promise<Tema> {
     return this.temaService.findById(id);
   }
 
   @Get('/descricao/:descricao')
   @HttpCode(HttpStatus.OK)
-  findAllBydescricao(@Param('descricao') descricao: string): Promise<Tema[]> {
+  findAllByDescricao(@Param('descricao') descricao: string): Promise<Tema[]> {
     return this.temaService.findAllByDescricao(descricao);
-  }
-
-  @Post()
-  @HttpCode(HttpStatus.CREATED)
-  create(@Body() tema: Tema): Promise<Tema> {
-    return this.temaService.create(tema);
   }
 
   @Put()

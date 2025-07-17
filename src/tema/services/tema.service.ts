@@ -35,7 +35,7 @@ export class TemaService {
         return tema;
     }
 
-    async findAllByDescricao(descricao: string) {
+    async findAllByDescricao(descricao: string): Promise<Tema[]> {
         const tema = await this.temaRepository.find({
             where: {
                 descricao: ILike(`%${descricao}%`)
@@ -45,7 +45,7 @@ export class TemaService {
             }
         });
 
-        if (!tema) {
+        if (tema.length === 0) {
             throw new HttpException("Nenhum tema foi encontrado", HttpStatus.NOT_FOUND);
         }
 
